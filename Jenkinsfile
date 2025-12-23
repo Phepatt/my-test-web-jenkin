@@ -1,34 +1,54 @@
 pipeline {
     agent any
 
+    options {
+        timestamps()
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                // Clone from your GitHub repo + main branch
+                git branch: 'main',
+                    url: 'https://github.com/Phepatt/my-test-web-jenkin.git'
             }
         }
 
-        stage('Install') {
+        stage('Install dependencies') {
             steps {
-                sh 'npm install'
+                // Windows agent: use `bat`
+                bat 'npm install'
             }
         }
 
-        stage('Test') {
+        stage('Run tests') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
 
-        stage('Run (optional)') {
+        stage('Optional run app') {
             when {
-                expression { return false } // change to true if you want to run the app in Jenkins
+                expression { false } // change to true if you want Jenkins to actually run the app
             }
             steps {
-                sh 'npm start'
+                bat 'npm start'
             }
         }
     }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+        success {
+            echo 'Pipeline succeeded.'
+        }
+    }
 }
+
 
 
