@@ -1,0 +1,27 @@
+{
+  "name": "simpleweb",
+  "version": "1.0.0",
+  "description": "Simple JavaScript web app for testing Jenkins pipelines",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "jenkins",
+    "demo",
+    "simple",
+    "javascript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
+
+
